@@ -3,6 +3,7 @@ package com.example.a68568_modul11
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -96,11 +97,12 @@ fun OnBoardingPreview() {
 }
 
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    var expanded by remember { mutableStateOf(false)}
+private fun Greeting(name: String, modifier: Modifier = Modifier) {
+    var expanded by rememberSaveable { mutableStateOf(false)}
 
-    val extraPadding = if (expanded) 48.dp else 0.dp
-
+    val extraPadding by animateDpAsState(
+        if (expanded) 48.dp else 0.dp
+    )
     Surface(
         color = MaterialTheme.colorScheme.primary,
         modifier = modifier.padding(vertical = 4.dp, horizontal = 8.dp)
